@@ -8,7 +8,7 @@ import { loadConfig } from './load-config';
  * Report the next version to be published using lerna.
  */
 export const lerna = async ({
-  emoji = ':rocket',
+  emoji = ':rocket:',
   noPublishMessage,
 } = {}) => {
   const cwd = process.cwd();
