@@ -16,7 +16,7 @@ jobs:
       - name: Test
         run: yarn test
 
-  deploy:
+  release:
     needs: test
     runs-on: ubuntu-latest
     steps:
