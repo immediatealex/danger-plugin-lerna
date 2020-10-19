@@ -14,6 +14,11 @@
     "type": "git",
     "url": "https://github.com/alexandermendes/danger-plugin-lerna"
   },
+  "keywords": [
+    "danger",
+    "danger-plugin",
+    "lerna"
+  ],
   "author": "Alex Mendes",
   "license": "MIT",
   "husky": {
