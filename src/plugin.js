@@ -10,7 +10,7 @@ import { loadConfig } from './load-config';
 export const lerna = async ({
   emoji = ':rocket',
   noPublishMessage,
-}) => {
+} = {}) => {
   const cwd = process.cwd();
   const pkgs = await getPackages(cwd);
   const graph = new PackageGraph(pkgs);
