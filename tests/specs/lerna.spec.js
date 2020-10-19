@@ -68,14 +68,14 @@ describe('Lerna', () => {
       await lernaPlugin();
 
       expect(message).toHaveBeenCalledWith(
-        expect.stringContaining('new version of the `package-one` package'),
+        ':rocket: A new version of the `package-one` package will be published.',
       );
       expect(message).toHaveBeenCalledWith(
-        expect.stringContaining('new version of the `package-two` package'),
+        ':rocket: A new version of the `package-two` package will be published.',
       );
     });
 
-    it('reports when no new versions will be published', async () => {
+    it('does not report when no new versions will be published by default', async () => {
       Object.assign(danger, {
         github: {
           pr: {},
@@ -86,7 +86,41 @@ describe('Lerna', () => {
 
       await lernaPlugin();
 
-      expect(message).toHaveBeenCalledWith(expect.stringContaining('will not publish'));
+      expect(message).not.toHaveBeenCalledWith();
+    });
+
+    it('reports when no new versions will be published if the setting given', async () => {
+      Object.assign(danger, {
+        github: {
+          pr: {},
+        },
+      });
+
+      collectUpdates.mockReturnValue([]);
+
+      await lernaPlugin({ noPublishMessage: 'Will not publish' });
+
+      expect(message).toHaveBeenCalledWith('Will not publish');
+    });
+
+    it('overrides the default emoji', async () => {
+      Object.assign(danger, {
+        github: {
+          pr: {},
+        },
+      });
+
+      collectUpdates.mockReturnValue([
+        {
+          name: 'package-one',
+        },
+      ]);
+
+      await lernaPlugin({ emoji: ':thinking:' });
+
+      expect(message).toHaveBeenCalledWith(
+        ':thinking: A new version of the `package-one` package will be published.',
+      );
     });
   });
 });
