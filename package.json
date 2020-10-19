@@ -1,7 +1,7 @@
 {
   "name": "danger-plugin-lerna",
   "version": "1.0.0",
-  "description": "Reports which packages will be published when a PR is merged.",
+  "description": "Reports which packages in a lerna mono-repo will be published.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
