@@ -122,5 +122,29 @@ describe('Lerna', () => {
         ':thinking: A new version of the `package-one` package will be published.',
       );
     });
+
+    it('adds custom formatting to the success message', async () => {
+      Object.assign(danger, {
+        github: {
+          pr: {},
+        },
+      });
+
+      collectUpdates.mockReturnValue([
+        {
+          name: 'package-one',
+        },
+      ]);
+
+      await lernaPlugin({
+        formatSuccessMessage(emoji, pkg) {
+          return `${emoji} My custom message about the ${pkg.name} package.`;
+        },
+      });
+
+      expect(message).toHaveBeenCalledWith(
+        ':rocket: My custom message about the package-one package.',
+      );
+    });
   });
 });

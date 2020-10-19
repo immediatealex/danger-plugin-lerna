@@ -10,6 +10,7 @@ import { loadConfig } from './load-config';
 export const lerna = async ({
   emoji = ':rocket:',
   noPublishMessage,
+  formatSuccessMessage,
 } = {}) => {
   const cwd = process.cwd();
   const pkgs = await getPackages(cwd);
@@ -28,6 +29,11 @@ export const lerna = async ({
   const changed = collectUpdates(pkgs, graph, { cwd }, lernaConfig);
 
   changed.forEach((pkg) => {
+    if (formatSuccessMessage) {
+      message(formatSuccessMessage(emoji, pkg));
+      return;
+    }
+
     message(`${emoji} A new version of the \`${pkg.name}\` package will be published.`);
   });
 

@@ -35,7 +35,22 @@ If package changes are detected messages will be published like so:
 
 The function accepts a settings object with the following properties:
 
-| name              | description                                                 |
-|-------------------|-------------------------------------------------------------|
-| `emoji`           | An emoji to prepend to the success message                  |
-| `noPublishMessage`| An optional message to show if there is nothing to publish. |
+| name                    | description                                               |
+|-----------------------|-------------------------------------------------------------|
+| `emoji`               | An emoji to prepend to the success message                  |
+| `noPublishMessage`    | A message to show if there is nothing to publish.           |
+| `formatSuccessMessage`| A function to format the success message.                   |
+
+**Example:**
+
+```js
+import lerna from 'danger-plugin-lerna';
+
+schedule(lerna({
+  emoji: ':thinking:',
+  noPublishMessage: 'No new package versions will be published',
+  formatSuccessMessage(emoji, pkg) {
+    return `${emoji} My custom message about the ${pkg.name} package`;
+  }
+}));
+```
