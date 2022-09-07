@@ -29,7 +29,7 @@
   "dependencies": {
     "@lerna/collect-updates": "^3.20.0",
     "@lerna/package-graph": "^3.18.5",
-    "@lerna/project": "^3.21.0",
+    "@lerna/project": "^4.0.0",
     "cosmiconfig": "^7.0.0"
   },
   "devDependencies": {
